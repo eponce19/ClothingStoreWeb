@@ -1,43 +1,44 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<Udem.LlamaClothingCo.Entities.Sale>
+@{
+    ViewBag.Title = "Browse Sales";
 }
-
-<h2>Your cart</h2>
+ 
+<h2>Your Orders</h2>
 <div>
-<table style="width: 90%; text-align: center">
+<table class="responsive" text-align: center">
    <thead>
        <tr>
-           <th style="text-align: center">Quantity</th>
-           <th style="text-align: left">Item</th>
-           <th style="text-align: right">Price</th>
-           <th style="text-align: right">Subtotal</th>
+           <th style="text-align: center">Sale Id</th>
+           <th style="text-align: left">Date</th>
+           <th style="text-align: right">Sale total</th>
+           <th style="text-align: right"></th>
        </tr>
    </thead>
-   <tbody>
-           <tr>
-               <td style="text-align: center">3</td>
-               <td style="text-align: left">Pants</td>
-               <td style="text-align: right">$20</td>
-               <td style="text-align: right">$60
-               </td>
-               <td>
-                   
-                   
-                       <input type="submit" class="actionButtons" value="Remove" />
-                   
-               </td>
-           </tr>
-   </tbody>
-   <tfoot>
-       <tr>
-           <td colspan="3" style="text-align: right">Total:</td>
-           <td style="text-align: right">
-               $60
-           </td>
-       </tr>
-   </tfoot>
+  <tbody>
+        @foreach (var sale in Model)
+        {
+            <tr>
+                <td style="text-align: center">@sale.SaleId</td>
+                <td style="text-align: left">@sale.Date</td>
+                <td style="text-align: right">@sale.SaleTotal</td>
+                <td><a href="@Url.Action("Details", "Sale", new { id = sale.SaleId })">Details</a></td> 
+                <td>
+                    @using (Html.BeginForm("RemoveFromSales", "Sale"))
+                    {
+                        @Html.Hidden("sale", sale.SaleId)
+                        <input type="submit" class="actionButtons" value="Remove" />
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromSales", "Sale"))
+                    {
+                        @Html.Hidden("sale", sale.SaleId)
+                        <input type="submit" class="actionButtons" value="Remove" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-<p style="text-align: center" class="actionButtons">
-  
-</p>
+
     </div>

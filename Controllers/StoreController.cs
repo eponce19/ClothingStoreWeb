@@ -116,7 +116,6 @@ namespace ClothingStoreWeb.Controllers
         {
             // Retrieve Genre and its Associated items from database
             var items = itemLogic.GetItemsByType(id);
-
             return View(items);
         }
 

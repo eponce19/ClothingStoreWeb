@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Udem.LlamaClothingCo.Business;
+using Udem.LlamaClothingCo.Entities;
 
 namespace ClothingStoreWeb.Controllers
 {
@@ -10,11 +12,15 @@ namespace ClothingStoreWeb.Controllers
     {
         //
         // GET: /Sale/
-
-        public ActionResult Index()
+        protected SaleLogic saleLogic = new SaleLogic();
+        protected ClientLogic clientLogic = new ClientLogic();
+       
+        public ActionResult Index(int id)
         {
-            ViewBag.Message = "My Cart";
-            return View();
+            ViewBag.Message = "My Sales";
+            // Retrieve Genre and its Associated items from database
+            var sales = saleLogic.GetSalesOfAClient(clientLogic.GetClientByID(id));
+            return View(sales);
         }
 
         //
@@ -22,7 +28,8 @@ namespace ClothingStoreWeb.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var details = saleLogic.GetDetailsofaSale(saleLogic.GetSaleByID(id));
+            return View(details);
         }
 
         //
@@ -101,6 +108,12 @@ namespace ClothingStoreWeb.Controllers
             {
                 return View();
             }
+        }
+
+        public RedirectToRouteResult RemoveFromSales(Sale sale, string returnUrl)
+        {
+            saleLogic.DeleteSale(sale);
+            return RedirectToAction("Index", new { returnUrl });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="es">
     <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -8,6 +9,8 @@
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" href="~/css/normalize.css" />
         <link rel="stylesheet" href="~/css/foundation.css" />
+        <link type="text/css" media="screen" rel="stylesheet" href="~/css/responsive-tables.css" />
+        <script type="text/javascript" src="~/Scripts/foundation/responsive-tables.js"></script>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
@@ -24,7 +27,8 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Products", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Cart", "Index", "Sale")</li>
+                            <li>@Html.ActionLink("Cart", "Index","Cart")</li>
+                            <li>@Html.ActionLink("Orders", "Index","Sale",routeValues: null, htmlAttributes: new { id = 2 })</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                         </ul>
                     </nav>
