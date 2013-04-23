@@ -9,93 +9,13 @@
   
 <div class="row">
  
-
- 
  
 <!-- Thumbnails -->
  
 <div class="large-12 columns">
 <div class="row">
+   @{Html.RenderAction("ItemsMenu", "Store");}
 
-@*    @foreach (var item in Model) {
-    <div class="large-4 small-6 columns">
-    <img src="http://placehold.it/1000x1000&text=Thumbnail">
- 
-    <div class="panel">
-         <li><a href="@Url.Action("Details", "Store",
-                new { id = item.ItemId })">
-            <span>@item.Name</span> </a>
-        </li>
-        <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
-        <h6 class="subheader">$@Html.DisplayFor(modelItem => item.Cost)</h6>
-        <a class="success button" href="#">Buy</a>
-        @Html.ActionLink("Edit", "Edit", new { id=item.ItemId })
-    </div>
-    </div>
-}*@
-
- 
-<div class="large-4 small-6 columns">
-<img src="http://placehold.it/500x500&text=Thumbnail">
- 
-<div class="panel">
-<h5>Item Name</h5>
-<h6 class="subheader">$000.00</h6>
-<a class="success button" href="#">
-      Buy
-</a>
-</div>
-</div>
- 
-<div class="large-4 small-6 columns">
-<img src="http://placehold.it/500x500&text=Thumbnail">
- 
-<div class="panel">
-<h5>Item Name</h5>
-<h6 class="subheader">$000.00</h6>
-<a class="success button" href="#">
-      Buy
-</a>
-</div>
-</div>
- 
-<div class="large-4 small-6 columns">
-<img src="http://placehold.it/500x500&text=Thumbnail">
- 
-<div class="panel">
-<h5>Item Name</h5>
-<h6 class="subheader">$000.00</h6>
-<a class="success button" href="#">
-      Buy
-</a>
-</div>
-</div>
- 
-<div class="large-4 small-6 columns">
-<img src="http://placehold.it/500x500&text=Thumbnail">
- 
-<div class="panel">
-<h5>Item Name</h5>
-<h6 class="subheader">$000.00</h6>
-<a class="success button" href="#">
-      Buy
-</a>
-</div>
-</div>
- 
-<div class="large-4 small-6 columns">
-<img src="http://placehold.it/500x500&text=Thumbnail">
- 
-<div class="panel">
-<h5>Item Name</h5>
-<h6 class="subheader">$000.00</h6>
-<a class="success button" href="#">
-      Buy
-</a>
-</div>
-</div>
-</div>
- 
 <!-- End Thumbnails -->
  
  

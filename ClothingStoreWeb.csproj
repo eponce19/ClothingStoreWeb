@@ -323,6 +323,8 @@
     <Content Include="Views\Account\_ChangeClientPartial.cshtml" />
     <Content Include="Views\Store\CategoMenu.cshtml" />
     <Content Include="Views\Store\Details.cshtml" />
+    <Content Include="Views\Store\ItemsMenu.cshtml" />
+    <Content Include="Views\Store\Browse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\GitHub\Llama\Udem.LlamaClothingCo\Business Layer\Udem.LlamaClothingCo.Business\Udem.LlamaClothingCo.Business.csproj">

@@ -28,7 +28,8 @@ namespace ClothingStoreWeb.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var item = itemLogic.GetItemByID(id);
+            return View(item);
         }
 
         //
@@ -109,14 +110,14 @@ namespace ClothingStoreWeb.Controllers
             }
         }
 
-        // GET: /Store/Browse?genre=Disco
+        // GET: /Store/Browse?catego=1
 
-        public ActionResult Browse(string catego)
+        public ActionResult Browse(int id)
         {
-            // Retrieve Genre and its Associated Albums from database
-            var genreModel = itemLogic.GetActiveTypes();
+            // Retrieve Genre and its Associated items from database
+            var items = itemLogic.GetItemsByType(id);
 
-            return View(genreModel);
+            return View(items);
         }
 
 
@@ -126,6 +127,14 @@ namespace ClothingStoreWeb.Controllers
             var catego = itemLogic.GetActiveTypes();
 
             return PartialView(catego);
+        }
+
+        [ChildActionOnly]
+        public ActionResult ItemsMenu()
+        {
+            var items = itemLogic.GetActiveItems();
+
+            return PartialView(items);
         }
     }
 }
