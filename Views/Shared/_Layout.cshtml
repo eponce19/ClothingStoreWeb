@@ -28,7 +28,7 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Products", "Index", "Home")</li>
                             <li>@Html.ActionLink("Cart", "Index","Cart")</li>
-                            <li>@Html.ActionLink("Orders", "Index","Sale",routeValues: null, htmlAttributes: new { id = 2 })</li>
+                            <li><a href="@Url.Content("~/Sale/Index/2")">Orders</a></li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                         </ul>
                     </nav>
@@ -40,17 +40,7 @@
             @RenderSection("featured", required: false)
 
             <section class="content-wrapper main-content clear-fix large-12 columns">
-                <!-- Side Bar -->
-        <div class="row">
-
-        <div class="large-2 columns">
-        <div class="hide-for-small panel">
-        <h3>Categories</h3>
-        @{Html.RenderAction("CategoMenu", "Store");}
-        </div>
-        </div>
-<!-- End Side Bar -->
-                <div class="large-10 columns">
+                <div class="large-12 columns">
                 @RenderBody()
                 </div>
             </section>

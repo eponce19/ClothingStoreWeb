@@ -9,9 +9,9 @@ namespace ClothingStoreWeb.Models
     /// <summary>
     /// This class contains the information to return the user back to continue shopping.
     /// </summary>
-    public class CartIndexViewModel
+    public class SaleIndexViewModel
     {
-        public Sale Cart { get; set; }
+        public Sale sale { get; set; }
 
         public string ReturnUrl { get; set; }
     }

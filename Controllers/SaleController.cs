@@ -14,6 +14,7 @@ namespace ClothingStoreWeb.Controllers
         // GET: /Sale/
         protected SaleLogic saleLogic = new SaleLogic();
         protected ClientLogic clientLogic = new ClientLogic();
+        protected ItemLogic itemLogic = new ItemLogic();
        
         public ActionResult Index(int id)
         {
@@ -28,7 +29,7 @@ namespace ClothingStoreWeb.Controllers
 
         public ActionResult Details(int id)
         {
-            var details = saleLogic.GetDetailsofaSale(saleLogic.GetSaleByID(id));
+            var details = saleLogic.GetSaleByID(id);
             return View(details);
         }
 
@@ -114,6 +115,14 @@ namespace ClothingStoreWeb.Controllers
         {
             saleLogic.DeleteSale(sale);
             return RedirectToAction("Index", new { returnUrl });
+        }
+
+        [ChildActionOnly]
+        public ActionResult ItemsNames(int id)
+        {
+            var items = itemLogic.GetItemByID(id);
+
+            return PartialView(items);
         }
     }
 }
