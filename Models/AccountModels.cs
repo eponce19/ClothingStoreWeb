@@ -30,7 +30,7 @@ namespace ClothingStoreWeb.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -40,17 +40,17 @@ namespace ClothingStoreWeb.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña actual")]
+        [Display(Name = "Actual password")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nueva contraseña")]
+        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmar la nueva contraseña")]
+        [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
@@ -58,32 +58,32 @@ namespace ClothingStoreWeb.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "¿Recordar cuenta?")]
+        [Display(Name = "¿Rememeber account?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
+        [Display(Name = "Password")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
     }

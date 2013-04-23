@@ -123,7 +123,7 @@ namespace ClothingStoreWeb.Controllers
         [ChildActionOnly]
         public ActionResult CategoMenu()
         {
-            var catego = itemLogic.GetActiveTypes();
+            var catego = itemLogic.GetActiveItemTypes();
 
             return PartialView(catego);
         }

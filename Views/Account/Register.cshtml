@@ -1,6 +1,6 @@
 ﻿@model ClothingStoreWeb.Models.RegisterModel
 @{
-    ViewBag.Title = "Registrarse";
+    ViewBag.Title = "Register";
 }
 
 <hgroup class="title">
@@ -13,7 +13,7 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Formulario de registro</legend>
+        <legend>Register</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -28,7 +28,7 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Registrarse" />
+        <input type="submit" value="Register" />
     </fieldset>
 }
 
