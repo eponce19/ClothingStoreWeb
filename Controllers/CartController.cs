@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Udem.LlamaClothingCo.Entities;
 using ClothingStoreWeb.Models;
+using Udem.LlamaClothingCo.Business;
 
 
 namespace ClothingStoreWeb.Views.Cart
@@ -13,21 +14,20 @@ namespace ClothingStoreWeb.Views.Cart
     {
         //
         // GET: /Cart/
+        protected ItemLogic itemLogic = new ItemLogic();
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
+            //var item = itemLogic.GetItemByID(idItem);
+
             return View();
         }
 
-        //public ViewResult Index(Sale cart, string returnUrl)
+        //public ViewResult Index()
         //{
-        //    var cartIndexViewModel = new CartIndexViewModel()
-        //    {
-        //        Cart = cart,
-        //        ReturnUrl = returnUrl
-        //    };
+        //    var item = itemLogic.GetItemByID(idItem);
 
-        //    return View(cartIndexViewModel);
+        //    return View(item);
         //}
 
     }

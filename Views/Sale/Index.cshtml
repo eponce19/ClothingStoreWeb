@@ -30,7 +30,8 @@
                 <td>
                     @using (Html.BeginForm("RemoveFromSales", "Sale"))
                     {
-                        @Html.Hidden("sale", sale.SaleId)
+                        @Html.Hidden("Idsale", sale.SaleId.ToString())
+                        @Html.Hidden("ReturnUrl", "/Sale/Index/2")
                         <input type="submit" class="actionButtons" value="Remove" />
                     }
                 </td>

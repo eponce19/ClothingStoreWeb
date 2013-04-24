@@ -111,8 +111,9 @@ namespace ClothingStoreWeb.Controllers
             }
         }
 
-        public RedirectToRouteResult RemoveFromSales(Sale sale, string returnUrl)
+        public RedirectToRouteResult RemoveFromSales(string idsale, string returnUrl)
         {
+            var sale= saleLogic.GetSaleByID(int.Parse(idsale));
             saleLogic.DeleteSale(sale);
             return RedirectToAction("Index", new { returnUrl });
         }

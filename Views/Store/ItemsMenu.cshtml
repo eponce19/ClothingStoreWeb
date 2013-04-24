@@ -11,7 +11,7 @@
         <h4><a href="@Url.Action("Details", "Store", new { id = item.ItemId })">@item.Name</a></h4> 
         <h5>@item.Description</h5>
         <h6 class="subheader">$@Html.DisplayFor(modelItem => item.Cost)</h6>
-        <p class="success radius button">@Html.ActionLink("Buy", "Edit", new { id=item.ItemId })</p>
+        <a class="success radius button" href="@Url.Content("~/Cart/Index/"+item.ItemId)">Buy</a>
     </div>
     </div>
     }
