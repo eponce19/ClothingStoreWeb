@@ -5,11 +5,13 @@
 //using System.Web.Mvc;
 //using Udem.LlamaClothingCo.Entities;
 
+
 //namespace ClothingStoreWeb.Models
 //{
 //    public partial class ShoppingCart
 //    {
-//        //MusicStoreEntities storeDB = new MusicStoreEntities();
+//        ClothingStoreEntities storeDB = new ClothingStoreEntities();
+        
 
 //        string ShoppingCartId { get; set; }
 
@@ -31,9 +33,9 @@
 //        public void AddToCart(Item item)
 //        {
 //            // Get the matching cart and album instances
-//            var cartItem = storeDB.Carts.SingleOrDefault(
-//c => c.CartId == ShoppingCartId
-//&& c.AlbumId == album.AlbumId);
+//            var cartItem =  storeDB.Sale.SingleOrDefault(
+//            c => c.SaleId == ShoppingCartId
+//            && c.AlbumId == album.AlbumId);
 
 //            if (cartItem == null)
 //            {

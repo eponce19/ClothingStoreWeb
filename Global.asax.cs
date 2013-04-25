@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ClothingStoreWeb.Models;
+using ClothingStoreWeb.Binders;
 
 namespace ClothingStoreWeb
 {
@@ -23,6 +25,7 @@ namespace ClothingStoreWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

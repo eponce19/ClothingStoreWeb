@@ -15,8 +15,9 @@ namespace ClothingStoreWeb.Controllers
         protected SaleLogic saleLogic = new SaleLogic();
         protected ClientLogic clientLogic = new ClientLogic();
         protected ItemLogic itemLogic = new ItemLogic();
-       
-        public ActionResult Index(int id)
+        int id = 2;
+
+        public ActionResult Index()
         {
             ViewBag.Message = "My Sales";
             // Retrieve Genre and its Associated items from database
@@ -113,9 +114,17 @@ namespace ClothingStoreWeb.Controllers
 
         public RedirectToRouteResult RemoveFromSales(string idsale, string returnUrl)
         {
-            var sale= saleLogic.GetSaleByID(int.Parse(idsale));
-            saleLogic.DeleteSale(sale);
-            return RedirectToAction("Index", new { returnUrl });
+            try
+            {
+                var sale = saleLogic.GetSaleByID(int.Parse(idsale));
+                saleLogic.DeleteSale(sale);
+                return RedirectToAction("Index", new { returnUrl });
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { returnUrl });
+            }
+            
         }
 
         [ChildActionOnly]
