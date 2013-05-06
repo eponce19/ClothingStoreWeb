@@ -5,30 +5,90 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Cree una cuenta nueva.</h2>
+    <h2>Create a new account</h2>
 </hgroup>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
+   
     <fieldset>
         <legend>Register</legend>
+        <div class="row">
+            <div class="large-5 columns">
+                <h3>Client Information</h3>
+                <br />
+                <fieldset>
+        <legend>Client information</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
             </li>
-            <li>
+              <li>
                 @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+                @Html.TextBoxFor(m => m.Password)
             </li>
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.TextBoxFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RFC)
+                @Html.TextBoxFor(m => m.RFC)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Telephone)
+                @Html.TextBoxFor(m => m.Telephone)
+            </li>
+            
+        </ol>
+    </fieldset>
+            </div>
+            <div class="large-5 columns">
+                <h3>Billing Address Information</h3>
+                <br />
+                <fieldset>
+        <legend>Billing Address Information</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(m => m.Street)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Number)
+                @Html.TextBoxFor(m => m.Number)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.State)
+                @Html.TextBoxFor(m => m.State)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ZipCode)
+                @Html.TextBoxFor(m => m.ZipCode)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+    </fieldset>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+             <div class="large-2 large-offset-10 columns"><input type="submit" value="Register" /></div>
+            
+        </div>
     </fieldset>
 }
 

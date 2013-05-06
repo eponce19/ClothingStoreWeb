@@ -1,4 +1,4 @@
-﻿@model ClothingStoreWeb.Models.LocalAddressModel
+﻿@model Udem.LlamaClothingCo.Entities.Client
 
 <h3>Cambiar Dirección</h3>
 
@@ -10,24 +10,24 @@
         <legend>Información de dirección de facturación</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.Street)
-                @Html.TextBoxFor(m => m.Street)
+                @Html.LabelFor(m => m.BillingAddress.Street)
+                @Html.TextBoxFor(m => m.BillingAddress.Street)
             </li>
             <li>
-                @Html.LabelFor(m => m.Number)
-                @Html.TextBoxFor(m => m.Number)
+                @Html.LabelFor(m => m.BillingAddress.Number)
+                @Html.TextBoxFor(m => m.BillingAddress.Number)
             </li>
             <li>
-                @Html.LabelFor(m => m.City)
-                @Html.TextBoxFor(m => m.City)
+                @Html.LabelFor(m => m.BillingAddress.City)
+                @Html.TextBoxFor(m => m.BillingAddress.City)
             </li>
             <li>
-                @Html.LabelFor(m => m.State)
-                @Html.TextBoxFor(m => m.State)
+                @Html.LabelFor(m => m.BillingAddress.State)
+                @Html.TextBoxFor(m => m.BillingAddress.State)
             </li>
             <li>
-                @Html.LabelFor(m => m.ZipCode)
-                @Html.TextBoxFor(m => m.ZipCode)
+                @Html.LabelFor(m => m.BillingAddress.ZipCode)
+                @Html.TextBoxFor(m => m.BillingAddress.ZipCode)
             </li>
         </ol>
         <input type="submit" value="Cambiar dirección" />

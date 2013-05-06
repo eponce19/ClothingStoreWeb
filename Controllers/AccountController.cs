@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using ClothingStoreWeb.Filters;
 using ClothingStoreWeb.Models;
+using Udem.LlamaClothingCo.Business;
+using Udem.LlamaClothingCo.Entities;
 
 namespace ClothingStoreWeb.Controllers
 {
@@ -17,6 +19,8 @@ namespace ClothingStoreWeb.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        ClientLogic client = new ClientLogic();
+        
         //
         // GET: /Account/Login
 
@@ -79,6 +83,28 @@ namespace ClothingStoreWeb.Controllers
                 // Intento de registrar al usuario
                 try
                 {
+                    Address addressModel = new Address();
+                    addressModel.Street = model.Street;
+                    addressModel.Number = Convert.ToInt32(model.Number);
+                    addressModel.City = model.City;
+                    addressModel.State = model.State;
+                    addressModel.ZipCode = Convert.ToInt32(model.ZipCode);
+                    addressModel.AddressTypeId = 1;
+                    addressModel.IsAddressActive = true;
+                    
+                    Client clientModel = new Client();
+                    clientModel.Email = model.UserName;
+                    clientModel.Password = model.Password;
+                    clientModel.FirstName = model.FirstName;
+                    clientModel.LastName = model.LastName;
+                    clientModel.RFC = model.RFC;
+                    clientModel.TelephoneNumber = model.Telephone;
+                    clientModel.BillingAddress = addressModel;
+                    clientModel.ShippingAddress = addressModel;
+                    clientModel.IsClientActive = true;
+                    clientModel.ClientTypeId = 1;
+                    client.AddClient(clientModel);
+                    //client.AuthenticateUser(model.UserName, model.Password,persistCookie:false);
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
@@ -134,64 +160,114 @@ namespace ClothingStoreWeb.Controllers
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            var clientdetail = client.GetClientByEmail(User.Identity.Name);
+            return View(clientdetail);
+            //return View();
         }
+
+        //public ActionResult Manage()
+        //{
+        //    var clientdetail = client.GetClientByEmail(WebSecurity.GetUserId(User.Identity.Name).ToString());
+        //    return View(clientdetail);
+        //}
 
         //
         // POST: /Account/Manage
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Manage(LocalPasswordModel model)
+        //{
+        //    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+        //    ViewBag.HasLocalPassword = hasLocalAccount;
+        //    ViewBag.ReturnUrl = Url.Action("Manage");
+            
+        //    if (hasLocalAccount)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            // ChangePassword iniciará una excepción en lugar de devolver false en determinados escenarios de error.
+        //            bool changePasswordSucceeded;
+        //            try
+        //            {
+        //                changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+        //            }
+        //            catch (Exception)
+        //            {
+        //                changePasswordSucceeded = false;
+        //            }
+
+        //            if (changePasswordSucceeded)
+        //            {
+        //                return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError("", "La contraseña actual es incorrecta o la nueva contraseña no es válida.");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // El usuario no dispone de contraseña local, por lo que debe quitar todos los errores de validación generados por un
+        //        // campo OldPassword vacío
+        //        ModelState state = ModelState["OldPassword"];
+        //        if (state != null)
+        //        {
+        //            state.Errors.Clear();
+        //        }
+
+        //        if (ModelState.IsValid)
+        //        {
+        //            try
+        //            {
+        //                WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
+        //                return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                ModelState.AddModelError("", e);
+        //            }
+        //        }
+        //    }
+
+        //    // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+        //    return View(model);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage(LocalPasswordModel model)
+        public ActionResult Manage(Client model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
+            ClientLogic client = new ClientLogic();
+
             if (hasLocalAccount)
             {
                 if (ModelState.IsValid)
                 {
                     // ChangePassword iniciará una excepción en lugar de devolver false en determinados escenarios de error.
+                    bool changeClientSucceeded;
                     bool changePasswordSucceeded;
                     try
                     {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                        changeClientSucceeded = client.UpdateClient(model);
+                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.Password, model.Password);
                     }
                     catch (Exception)
                     {
-                        changePasswordSucceeded = false;
+                        changeClientSucceeded = false;
                     }
 
-                    if (changePasswordSucceeded)
+                    if (changeClientSucceeded)
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
                     {
-                        ModelState.AddModelError("", "La contraseña actual es incorrecta o la nueva contraseña no es válida.");
-                    }
-                }
-            }
-            else
-            {
-                // El usuario no dispone de contraseña local, por lo que debe quitar todos los errores de validación generados por un
-                // campo OldPassword vacío
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
-                {
-                    state.Errors.Clear();
-                }
-
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
+                        ModelState.AddModelError("", "Hubo un error al actualizar los datos del cliente");
                     }
                 }
             }

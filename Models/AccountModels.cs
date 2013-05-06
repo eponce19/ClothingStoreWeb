@@ -58,6 +58,7 @@ namespace ClothingStoreWeb.Models
     public class LoginModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
@@ -73,7 +74,8 @@ namespace ClothingStoreWeb.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Username")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -83,9 +85,54 @@ namespace ClothingStoreWeb.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "RFC")]
+        public string RFC { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Telephone")]
+        public string Telephone { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Number")]
+        public string Number { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [DataType(DataType.PostalCode)]
+        [Display(Name = "ZipCode")]
+        public string ZipCode { get; set; }
     }
 
     public class ExternalLogin

@@ -15,13 +15,13 @@ namespace ClothingStoreWeb.Controllers
         protected SaleLogic saleLogic = new SaleLogic();
         protected ClientLogic clientLogic = new ClientLogic();
         protected ItemLogic itemLogic = new ItemLogic();
-        int id = 2;
+        
 
         public ActionResult Index()
         {
             ViewBag.Message = "My Sales";
             // Retrieve Genre and its Associated items from database
-            var sales = saleLogic.GetSalesOfAClient(clientLogic.GetClientByID(id));
+            var sales = saleLogic.GetSalesOfAClient(clientLogic.GetClientByEmail(User.Identity.Name));
             return View(sales);
         }
 

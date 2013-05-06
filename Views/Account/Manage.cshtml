@@ -1,31 +1,95 @@
-﻿@model ClothingStoreWeb.Models.LocalPasswordModel
+﻿@model Udem.LlamaClothingCo.Entities.Client
 @{
     ViewBag.Title = "Administrar cuenta";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account</h2>
 </hgroup>
 
-<p class="message-success">@ViewBag.StatusMessage</p>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
 
-<p>Ha iniciado sesión como <strong>@User.Identity.Name</strong>.</p>
-
-@if (ViewBag.HasLocalPassword)
-{
-<div class="row">
-    <div class="large-6 columns">@Html.Partial("_ChangeClientPartial")</div>
-    <div class="large-6 columns">@Html.Partial("_ChangePasswordPartial")</div>
-    </div>
-    <hr />
-    <div class="row">
-    <div class="large-6 columns">@Html.Partial("_ChangeAddressPartial")</div>
-    </div>
-    
-}
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
+   
+    <fieldset>
+        <legend>Register</legend>
+        <div class="row">
+            <div class="large-5 columns">
+                <h3>Client Information</h3>
+                <br />
+                <fieldset>
+        <legend>Client information</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+              <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.TextBoxFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.TextBoxFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RFC)
+                @Html.TextBoxFor(m => m.RFC)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.TelephoneNumber)
+                @Html.TextBoxFor(m => m.TelephoneNumber)
+            </li>
+            
+        </ol>
+    </fieldset>
+            </div>
+            <div class="large-5 columns">
+                <h3>Billing Address Information</h3>
+                <br />
+                <fieldset>
+        <legend>Billing Address Information</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.BillingAddress.Street)
+                @Html.TextBoxFor(m => m.BillingAddress.Street)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.BillingAddress.Number)
+                @Html.TextBoxFor(m => m.BillingAddress.Number)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.BillingAddress.City)
+                @Html.TextBoxFor(m => m.BillingAddress.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.BillingAddress.State)
+                @Html.TextBoxFor(m => m.BillingAddress.State)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.BillingAddress.ZipCode)
+                @Html.TextBoxFor(m => m.BillingAddress.ZipCode)
+            </li>
+        </ol>
+    </fieldset>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+             <div class="large-2 large-offset-10 columns"><input type="submit" value="Update" /></div>
+            
+        </div>
+    </fieldset>
 }
 
 @section Scripts {

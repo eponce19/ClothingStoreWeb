@@ -1,4 +1,4 @@
-﻿@model ClothingStoreWeb.Models.LocalClientModel
+﻿@model Udem.LlamaClothingCo.Entities.Client
 
 <h3>Cambiar Información de Perfil</h3>
 
@@ -12,6 +12,7 @@
             <li>
                 @Html.LabelFor(m => m.FirstName)
                 @Html.TextBoxFor(m => m.FirstName)
+                @Model.FirstName
             </li>
             <li>
                 @Html.LabelFor(m => m.LastName)
@@ -22,16 +23,16 @@
                 @Html.TextBoxFor(m => m.RFC)
             </li>
             <li>
-                @Html.LabelFor(m => m.Telephone)
-                @Html.TextBoxFor(m => m.Telephone)
+                @Html.LabelFor(m => m.TelephoneNumber)
+                @Html.TextBoxFor(m => m.TelephoneNumber)
             </li>
             <li>
                 @Html.LabelFor(m => m.Email)
                 @Html.TextBoxFor(m => m.Email)
             </li>
             <li>
-                @Html.LabelFor(m => m.ClientType)
-                @Html.TextBoxFor(m => m.ClientType)
+                @Html.LabelFor(m => m.ClientType.Description)
+                @Html.TextBoxFor(m => m.ClientType.Description)
             </li>
             
         </ol>
