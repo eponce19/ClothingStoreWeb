@@ -5,24 +5,29 @@ using System.Web;
 using System.Text;
 using System.Threading.Tasks;
 using Udem.LlamaClothingCo.Entities;
+using Udem.LlamaClothingCo.Business;
+
 
 namespace ClothingStoreWeb.Models
 {
     public class Cart
     {
         private readonly List<CartLine> _items = new List<CartLine>();
+        ItemLogic itemLogic = new ItemLogic();
 
-        public void AddItem(Item product, int quantity)
+
+
+        public void AddItem(Item item, int quantity)
         {
             lock (this)
             {
                 var storedItem = _items
-                .Where(prod => prod.Product.ItemId == product.ItemId)
+                .Where(prod => prod.Product.ItemId == item.ItemId)
                 .FirstOrDefault();
 
                 if (storedItem == null)
                 {
-                    _items.Add(new CartLine() { Product = product, Quantity = quantity });
+                    _items.Add(new CartLine() { Product = item, Quantity = quantity });
                 }
                 else
                 {

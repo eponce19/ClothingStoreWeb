@@ -1,7 +1,7 @@
-﻿@model Udem.LlamaClothingCo.Entities.Address
+﻿@model Udem.LlamaClothingCo.Entities.Client
 
 @{
-    ViewBag.Title = "Sports Store : Checkout";
+    ViewBag.Title = "Checkout";
 }
 
 <h2>Checkout now</h2>
@@ -9,19 +9,41 @@ Please enter your details, and we'll ship your goods right away!
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary()
+
+<div class="row">
+        <div class="large-6 columns">
+            <ul class="vcard large 12 columns">
+            <li class="fn">Client</li>
+            <li class="locality">@Model.FirstName @Model.LastName</li>
+            <li class="locality">@Model.RFC</li>
+            <li><span class="locality">@Model.TelephoneNumber</span></li>
+            <li class="email"><a href="#">@Model.Email</a></li>
+            </ul>
+        </div>
+        <div class="large-6 columns">
+            <ul class="vcard large 12 columns">
+            <li class="fn">Shipping Address</li>
+            <li class="street-address">@Model.ShippingAddress.Street @Model.ShippingAddress.Number</li>
+            <li class="locality">@Model.ShippingAddress.City</li>
+            <li><span class="state">@Model.ShippingAddress.State</span>, <span class="zip">@Model.ShippingAddress.ZipCode</span></li>
+            </ul>
+        </div>
+    </div>
+    @*
+
     <h3>Ship to</h3>
-    @*<div>Name: @Html.EditorFor(details => details.Name)</div>
+    <div>Name: @Html.EditorFor(details => details.Name)</div>
     
     <h3>Address</h3>
     <div>Line 1: @Html.EditorFor(details => details.Line1)</div>
     <div>Line 2: @Html.EditorFor(details => details.Line2)</div>
-    <div>Line 3: @Html.EditorFor(details => details.Line3)</div>*@
+    <div>Line 3: @Html.EditorFor(details => details.Line3)</div>
     <div>City: @Html.EditorFor(details => details.City)</div>
-    <div>State: @Html.EditorFor(details => details.State)</div>@*
+    <div>State: @Html.EditorFor(details => details.State)</div>
     <div>Zip: @Html.EditorFor(details => details.Zip)</div>
     <div>Country: @Html.EditorFor(details => details.Country)</div>*@
     
     <p style="text-align: center">
-        <input class="actionButtons" type="submit" value="Complete order" />
+        <input class="small success radius button" type="submit" value="Complete order" />
     </p>
 }

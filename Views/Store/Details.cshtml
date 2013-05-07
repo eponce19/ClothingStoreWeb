@@ -30,10 +30,16 @@
 <div class="large-8 columns" id="item-details">
     <p>Description:@Model.Description</p>
     <p>Price:$@String.Format("{0:F}", Model.Cost)</p>
-    <p class="success radius button">
-        @Html.ActionLink("Add to cart", "AddToCart", 
-        "ShoppingCart", new { id = Model.ItemId}, "")
-    </p>
+    
+    
+       @using (Html.BeginForm("AddToCart", "Cart"))
+
+     {
+        @Html.Hidden("productId",Model.ItemId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input class="success radius button" type="submit" value="+ Add to Cart" />
+    }
+    
 </div>
 </div>
 </div>

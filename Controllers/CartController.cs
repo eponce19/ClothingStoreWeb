@@ -13,17 +13,14 @@ namespace ClothingStoreWeb.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IProductRepository _productRepository;
-        private readonly IOrderProcessor _orderProcessor;
+        protected ItemLogic itemLogic= new ItemLogic();
+        protected ClientLogic clientLogic = new ClientLogic();
+        protected SaleLogic saleLogic = new SaleLogic();
+        private readonly List<CartLine> _items = new List<CartLine>();
 
-        public CartController(IProductRepository productRepository, IOrderProcessor orderProcessor)
-        {
-            _productRepository = productRepository;
-            _orderProcessor = orderProcessor;
-        }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, Address shippingDetails)
+        public ViewResult Checkout(Cart cart, Client client)
         {
             if (cart.Lines.Count() == 0)
             {
@@ -32,12 +29,27 @@ namespace ClothingStoreWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _orderProcessor.ProcessOrder(cart, shippingDetails);
+                
+                Sale sale=new Sale();
+                sale.Client=client;
+                sale.ShippingAddress=client.ShippingAddress;
+                sale.SaleTotal=cart.ComputeTotalValue();
+                sale.Date = DateTime.Today;
+                ICollection<SaleDetail> icollection = new ICollection<SaleDetail>();
+                
+                foreach (var line in cart.Lines)
+                {
+                    SaleDetail saledetail = new SaleDetail();
+                    saledetail.Item = line.Product;
+                    saledetail.Quantity = line.Quantity;
+                    icollection.Add(saledetail);
+                }
+                saleLogic.AddSale(sale, icollection);
                 cart.Clear();
                 return View("Completed");
             }
 
-            return View(shippingDetails);
+            return View(client);
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -48,13 +60,13 @@ namespace ClothingStoreWeb.Controllers
                 ReturnUrl = returnUrl
             };
 
-            return View(cartIndexViewModel);    
+            return View(cartIndexViewModel);
         }
 
         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
-            var product = _productRepository.Products
-                .FirstOrDefault(prod => prod.ItemId == productId);
+            
+            var product = itemLogic.GetItemByID(productId);
 
             if (product != null)
             {
@@ -63,6 +75,7 @@ namespace ClothingStoreWeb.Controllers
 
             return RedirectToAction("Index", new { returnUrl });
         }
+
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
         {
@@ -84,7 +97,8 @@ namespace ClothingStoreWeb.Controllers
 
         public ViewResult Checkout()
         {
-            return View(new Address());
+            var client = clientLogic.GetClientByEmail(User.Identity.Name);
+            return View(client);
         }
     }
 }

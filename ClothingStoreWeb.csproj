@@ -168,7 +168,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -331,7 +330,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Account\_ChangeAddressPartial.cshtml" />
     <Content Include="Views\Account\_ChangeClientPartial.cshtml" />
     <Content Include="Views\Store\CategoMenu.cshtml" />
