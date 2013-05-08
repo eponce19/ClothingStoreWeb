@@ -13,7 +13,7 @@ namespace ClothingStoreWeb.Models
     public class Cart
     {
         private readonly List<CartLine> _items = new List<CartLine>();
-        ItemLogic itemLogic = new ItemLogic();
+        //ItemLogic itemLogic = new ItemLogic();
 
 
 

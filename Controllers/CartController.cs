@@ -20,8 +20,9 @@ namespace ClothingStoreWeb.Controllers
 
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, Client client)
+        public ViewResult Checkout(Cart cart)
         {
+            var client = clientLogic.GetClientByEmail(User.Identity.Name);
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your cart is empty.");
@@ -31,11 +32,11 @@ namespace ClothingStoreWeb.Controllers
             {
                 
                 Sale sale=new Sale();
-                sale.Client=client;
+                sale.Client = client;
                 sale.ShippingAddress=client.ShippingAddress;
                 sale.SaleTotal=cart.ComputeTotalValue();
                 sale.Date = DateTime.Today;
-                ICollection<SaleDetail> icollection = new ICollection<SaleDetail>();
+                ICollection<SaleDetail> icollection = new List<SaleDetail>();
                 
                 foreach (var line in cart.Lines)
                 {
