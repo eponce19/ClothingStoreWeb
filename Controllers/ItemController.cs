@@ -10,7 +10,9 @@ namespace ClothingStoreWeb.Controllers
 {
     public class ItemController : Controller
     {
-        public ItemLogic itemLogic = new ItemLogic();
+        static TestContext context = (TestContext)System.Web.HttpContext.Current.ApplicationInstance.Application["Context"];
+
+        public ItemLogic itemLogic = new ItemLogic(context);
         //
         // GET: /Item/
 

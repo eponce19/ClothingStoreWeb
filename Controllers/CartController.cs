@@ -13,9 +13,10 @@ namespace ClothingStoreWeb.Controllers
 {
     public class CartController : Controller
     {
-        protected ItemLogic itemLogic= new ItemLogic();
-        protected ClientLogic clientLogic = new ClientLogic();
-        protected SaleLogic saleLogic = new SaleLogic();
+        static TestContext context = (TestContext) System.Web.HttpContext.Current.ApplicationInstance.Application["Context"];
+        protected ItemLogic itemLogic= new ItemLogic(context);
+        protected ClientLogic clientLogic = new ClientLogic(context);
+        protected SaleLogic saleLogic = new SaleLogic(context);
         private readonly List<CartLine> _items = new List<CartLine>();
 
 
@@ -31,21 +32,24 @@ namespace ClothingStoreWeb.Controllers
             if (ModelState.IsValid)
             {
                 
-                Sale sale=new Sale();
+                Sale sale= Sale.CreateSale(0,client.ClientId,cart.ComputeTotalValue(),DateTime.Today, client.ShippingAddressId);
+                /*
                 sale.Client = client;
                 sale.ShippingAddress=client.ShippingAddress;
                 sale.SaleTotal=cart.ComputeTotalValue();
-                sale.Date = DateTime.Today;
+                sale.Date = DateTime.Today;*/
+                saleLogic.AddSale(sale);
                 ICollection<SaleDetail> icollection = new List<SaleDetail>();
                 
                 foreach (var line in cart.Lines)
                 {
-                    SaleDetail saledetail = new SaleDetail();
+                    SaleDetail saledetail = SaleDetail.CreateSaleDetail(sale.SaleId,line.Product.ItemId, line.Quantity);
                     saledetail.Item = line.Product;
                     saledetail.Quantity = line.Quantity;
                     icollection.Add(saledetail);
                 }
-                saleLogic.AddSale(sale, icollection);
+               
+                saleLogic.AddSale(icollection);
                 cart.Clear();
                 return View("Completed");
             }

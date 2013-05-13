@@ -10,11 +10,13 @@ namespace ClothingStoreWeb.Controllers
 {
     public class SaleController : Controller
     {
-        //
+
+        static TestContext context = (TestContext)System.Web.HttpContext.Current.ApplicationInstance.Application["Context"];
+
         // GET: /Sale/
-        protected SaleLogic saleLogic = new SaleLogic();
-        protected ClientLogic clientLogic = new ClientLogic();
-        protected ItemLogic itemLogic = new ItemLogic();
+        protected SaleLogic saleLogic = new SaleLogic(context);
+        protected ClientLogic clientLogic = new ClientLogic(context);
+        protected ItemLogic itemLogic = new ItemLogic(context);
         
 
         public ActionResult Index()

@@ -20,6 +20,7 @@ namespace ClothingStoreWeb.Binders
             {
                 cart = new Cart();
                 controllerContext.HttpContext.Session[SessionKey] = cart;
+                
             }
 
             return cart;

@@ -344,15 +344,15 @@
     <Content Include="Views\Cart\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\GitHub\Llama\Udem.LlamaClothingCo\Business Layer\Udem.LlamaClothingCo.Business\Udem.LlamaClothingCo.Business.csproj">
+    <ProjectReference Include="..\..\..\..\..\Llama\Udem.LlamaClothingCo\Business Layer\Udem.LlamaClothingCo.Business\Udem.LlamaClothingCo.Business.csproj">
       <Project>{2ad7d8b6-0d54-4967-aa1c-be68399b61c7}</Project>
       <Name>Udem.LlamaClothingCo.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\GitHub\Llama\Udem.LlamaClothingCo\Data Access Layer\Udem.LlamaClothingCo.Entities\Udem.LlamaClothingCo.Entities.csproj">
+    <ProjectReference Include="..\..\..\..\..\Llama\Udem.LlamaClothingCo\Data Access Layer\Udem.LlamaClothingCo.Entities\Udem.LlamaClothingCo.Entities.csproj">
       <Project>{e7dbdda0-9cfe-45e0-a822-c9d0eb1124d7}</Project>
       <Name>Udem.LlamaClothingCo.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\GitHub\Llama\Udem.LlamaClothingCo\Data Access Layer\Udem.LlamaClothingCo.Managers\Udem.LlamaClothingCo.Managers.csproj">
+    <ProjectReference Include="..\..\..\..\..\Llama\Udem.LlamaClothingCo\Data Access Layer\Udem.LlamaClothingCo.Managers\Udem.LlamaClothingCo.Managers.csproj">
       <Project>{f54d6516-cb53-4a91-a693-be3fb6b9877a}</Project>
       <Name>Udem.LlamaClothingCo.Managers</Name>
     </ProjectReference>

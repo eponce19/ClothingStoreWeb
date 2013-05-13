@@ -8,6 +8,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using ClothingStoreWeb.Models;
 using ClothingStoreWeb.Binders;
+using Udem.LlamaClothingCo.Entities;
+using Udem.LlamaClothingCo.Managers;
 
 namespace ClothingStoreWeb
 {
@@ -18,6 +20,7 @@ namespace ClothingStoreWeb
     {
         protected void Application_Start()
         {
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -26,6 +29,8 @@ namespace ClothingStoreWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+            TestContext context = new TestContext();
+            Application["Context"] = new TestContext();
         }
     }
 }

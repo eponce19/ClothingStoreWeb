@@ -15,11 +15,14 @@ using Udem.LlamaClothingCo.Entities;
 
 namespace ClothingStoreWeb.Controllers
 {
+
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        ClientLogic client = new ClientLogic();
+        static TestContext context = (TestContext)System.Web.HttpContext.Current.ApplicationInstance.Application["Context"];
+
+        ClientLogic client = new ClientLogic(context);
         
         //
         // GET: /Account/Login
@@ -239,10 +242,11 @@ namespace ClothingStoreWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(Client model)
         {
+
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
-            ClientLogic client = new ClientLogic();
+            ClientLogic client = new ClientLogic(context);
 
             if (hasLocalAccount)
             {
@@ -253,7 +257,8 @@ namespace ClothingStoreWeb.Controllers
                     bool changePasswordSucceeded;
                     try
                     {
-                        changeClientSucceeded = client.UpdateClient(model);
+                        //changeClientSucceeded = client.UpdateClient(model);
+                        changeClientSucceeded = true;
                         changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.Password, model.Password);
                     }
                     catch (Exception)

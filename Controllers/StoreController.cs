@@ -4,22 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Udem.LlamaClothingCo.Business;
+using Udem.LlamaClothingCo.Entities;
 
 namespace ClothingStoreWeb.Controllers
 {
     public class StoreController : Controller
     {
+        static TestContext context;
+        protected ItemLogic itemLogic;
+
         public StoreController() : base()
         {
-
+           // System.Web.HttpContext.Current.Items.Add("Context", new TestContext());
+            context = System.Web.HttpContext.Current.ApplicationInstance.Application["Context"] as TestContext;
+            itemLogic = new ItemLogic(context);
         }
         
         //
         // GET: /Store/
-        protected ItemLogic itemLogic = new ItemLogic();
+       
 
         public ActionResult Index()
         {
+            
             return View();
         }
 
